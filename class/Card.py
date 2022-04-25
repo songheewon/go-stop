@@ -47,13 +47,12 @@ class CardType(object):
     BiGwang = 2  # 비광(12월 광)
     Meong = 3  # 멍
     Godori = 4  # 고도리 패
-    Gukjin = 5  # 국진
-    RedTtee = 6  # 홍단
-    BlueTtee = 7  # 청단
-    Ttee = 8  # 초단
-    BiTtee = 9  # 비초단
-    Pee = 10  # 피
-    SsangPee = 11  # 쌍피
+    RedTtee = 5  # 홍단
+    BlueTtee = 6  # 청단
+    Ttee = 7  # 초단
+    BiTtee = 8  # 비초단
+    Pee = 9  # 피
+    SsangPee = 10  # 쌍피
 
 
 JanGwang = Card("JanGwang", Month.Jan, CardType.Gwang)
@@ -96,7 +95,7 @@ AugGodori = Card("AugTtee", Month.Aug, CardType.Godori)
 AugPee1 = Card("AugPee1", Month.Aug, CardType.Pee)
 AugPee2 = Card("AugPee2", Month.Aug, CardType.Pee)
 
-SepGukjin = Card("SepGukjin", Month.Sep, CardType.Gukjin)  # 이 카드의 처리가 힘들지 않을까..?
+SepGukjin = Card("SepGukjin", Month.Sep, [CardType.Meong, CardType.SsangPee])  # 이 카드의 처리가 힘들지 않을까..?
 SepTtee = Card("SepTtee", Month.Sep, CardType.BlueTtee)
 SepPee1 = Card("SepPee1", Month.Sep, CardType.Pee)
 SepPee2 = Card("SepPee2", Month.Sep, CardType.Pee)
@@ -119,8 +118,8 @@ DecSsangPee = Card("DecSsangPee", Month.Dec, CardType.Pee)
 Bonus1 = Card("Bonus1", Month.Bonus, CardType.SsangPee)
 Bonus2 = Card("Bonus2", Month.Bonus, CardType.SsangPee)
 
-cards = (JanGwang, JanTtee, JanPee1, JanPee2, FebGodori, FebTtee, FebPee1, FebPee2, MarGwang, MarTtee, MarPee1, MarPee2,
+cards = [JanGwang, JanTtee, JanPee1, JanPee2, FebGodori, FebTtee, FebPee1, FebPee2, MarGwang, MarTtee, MarPee1, MarPee2,
          AprGodori, AprTtee, AprPee1, AprPee2, MayMeong, MayTtee, MayPee1, MayPee2, JunMeong, JunTtee, JunPee1, JunPee2,
          JulMeong, JulTtee, JulPee1, JulPee2, AugGwang, AugGodori, AugPee1, AugPee2, SepGukjin, SepTtee, SepPee1,
          SepPee2, OctMeong, OctTtee, OctPee1, OctPee2, NovGwang, NovPee1, NovPee2, NovSsangPee, DecBiGwang, DecMeong,
-         DecBiTtee, DecSsangPee, Bonus1, Bonus2)
+         DecBiTtee, DecSsangPee, Bonus1, Bonus2]
