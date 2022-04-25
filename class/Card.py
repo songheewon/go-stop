@@ -119,7 +119,6 @@ DecSsangPee = Card("DecSsangPee", Month.Dec, CardType.Pee)
 Bonus1 = Card("Bonus1", Month.Bonus, CardType.SsangPee)
 Bonus2 = Card("Bonus2", Month.Bonus, CardType.SsangPee)
 
-
 cards = (JanGwang, JanTtee, JanPee1, JanPee2, FebGodori, FebTtee, FebPee1, FebPee2, MarGwang, MarTtee, MarPee1, MarPee2,
          AprGodori, AprTtee, AprPee1, AprPee2, MayMeong, MayTtee, MayPee1, MayPee2, JunMeong, JunTtee, JunPee1, JunPee2,
          JulMeong, JulTtee, JulPee1, JulPee2, AugGwang, AugGodori, AugPee1, AugPee2, SepGukjin, SepTtee, SepPee1,
