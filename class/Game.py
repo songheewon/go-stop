@@ -25,4 +25,18 @@ class Game(object):
                 self.cards_on_table += self.deck.pop()
         return self
 
-
+    def getWinner(self):
+        # 총통은 바로 승리 처리
+        if self.player1_hand.chongTong() and self.player2_hand.chongTong():
+            player1_chongtong_month = self.player1_hand.getChongTongMonth()
+            player2_chongtong_month = self.player2_hand.getChongTongMonth()
+            if player1_chongtong_month > player2_chongtong_month:
+                self.winner = "player 1"
+            else:
+                self.winner = "player 2"
+        elif self.player1_hand.chongTong():
+            self.winner = "player 1"
+        elif self.player2_hand.chongTong():
+            self.winner = "player 2"
+        else: # 여기부터 다시 처리해주기
+            self.winner = None
