@@ -11,13 +11,16 @@ class Card(object):
     def __str__(self):
         return self.name
 
-    # Card 객체 간의 크기 비교
-    def __eq__(self, other):
-        if other is None:
-            return False
-        elif isinstance(other, self.__class__):
-            return self.month == other.month and self.card_type == other.card_type
-        return not NotImplemented
+    # __eq__ 함수가 필요하려나...?
+    # def __eq__(self, other):
+    #     if other is None:
+    #         return False
+    #     elif isinstance(other, self.__class__):
+    #         return self.month == other.month and self.card_type == other.card_type
+    #     return not NotImplemented
+
+    # Card 객체 간의 크기 비교는 할 일이 없으니 __lt__나 __gt__와 같은 함수는 생성 x
+    # 혹시 미니게임으로 섯다를 추가하게 될 경우 만들자!
 
     def __hash__(self):
         return hash(self.month, self.card_type)
