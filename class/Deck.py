@@ -1,11 +1,12 @@
 import random
-import Card # cards 변수를 사용하기 위함
+import Card
 
 
 class Deck(list):
-    # 카드를 섞기 전 상태의 디폴트는 cards 상태 1~12월 순
-    def __init__(self, before_shuffle=Card.cards):
-        super(Deck, self).__init__(before_shuffle)
+    # prev_card를 추가한 이유는 한 턴이 종료되더라도 덱은 그대로 유지되어야 하기 때문에!!!
+    # 덱이 변경되는 시점은 새 게임을 시작했을 때뿐임
+    def __init__(self, prev_card=Card.cards):
+        super(Deck, self).__init__(prev_card)
 
     # 카드를 섞는 함수
     def cardShuffle(self):
