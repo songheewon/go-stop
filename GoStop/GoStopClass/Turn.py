@@ -3,7 +3,6 @@ import CardsMatched
 import CardsOnTable
 import CardsOnHand
 import TurnStart
-import Pair
 
 
 class Turn(object):

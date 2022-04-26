@@ -1,6 +1,7 @@
-import pygame, sys
-import GoStop
-#import Turn from GoStop
+import pygame
+import sys
+
+from GoStopClass import Card
 
 # 초기화
 pygame.init()
