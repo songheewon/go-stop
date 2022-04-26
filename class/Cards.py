@@ -1,6 +1,8 @@
 class Cards(object):
-    def __init__(self, *cards):
-        self.cards = list(cards)
+    # prev_cards를 추가한 이유는 이 카드가 게임 중간 턴의 경우 이전 턴의 정보를 전달받아야하는데
+    # 그러기 위해서 매개변수로 이전 턴의 정보를 전달해준 후에 새로운 객체를 만들면 된다고 생각해서!
+    def __init__(self, *prev_cards): # 가변 인수 설정
+        self.cards = list(prev_cards)
 
     # def __repr__(self):
     #     return "{__class__.__name__}({})".format(
