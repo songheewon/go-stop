@@ -54,6 +54,9 @@ class CardType(object):
     PEE = 9  # 피
     SSANGPEE = 10  # 쌍피
 
+#class ImgName(object):
+
+
 
 jan_gwang = Card("JanGwang", Month.JAN, CardType.GWANG)
 jan_ttee = Card("JanTtee", Month.JAN, CardType.REDTTEE)
