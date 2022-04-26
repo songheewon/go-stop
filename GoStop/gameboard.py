@@ -2,27 +2,30 @@ import pygame
 import sys
 
 from GoStopClass import Turn
+from GoStopClass import Player
 
 # 초기화
 pygame.init()
 pygame.display.set_caption("맞고 게임")
 big_font = pygame.font.SysFont("notosanscjkkr", 80)  # 큰 글씨
 small_font = pygame.font.SysFont("notosanscjkkr", 40)  # 작은 글씨
-smallest_font = pygame.font.SysFont("notosanscjkkr", 30) # 더 작은 글씨
+smallest_font = pygame.font.SysFont("notosanscjkkr", 30)  # 더 작은 글씨
 screen = pygame.display.set_mode([1200, 800])  # 창 크기 설정
 FPSCLOCK = pygame.time.Clock()
 
 push_key_msg = small_font.render("Press SPACE BAR to Start", True, (255, 255, 255))
 start_screen = pygame.image.load("맞고.png")
+
+
 def main():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN: # 키가 눌렸다면
-                if event.key==pygame.K_SPACE: # 그 키가 스페이스바인지 확인하고
-                    game_screen() # 게임화면으로 넘어가도록 설정
+            if event.type == pygame.KEYDOWN:  # 키가 눌렸다면
+                if event.key == pygame.K_SPACE:  # 그 키가 스페이스바인지 확인하고
+                    game_screen()  # 게임화면으로 넘어가도록 설정
         screen.blit(start_screen, (0, 0))
         screen.blit(push_key_msg, (427, 600))
         pygame.display.update()
@@ -84,15 +87,28 @@ temp_table6 = pygame.image.load("SepPee1.jpg")
 temp_table7 = pygame.image.load("SepPee1.jpg")
 temp_table8 = pygame.image.load("SepPee1.jpg")
 
-players = [0, 1]
+players = [Player.HumanPlayer("ME"), Player.ComputerPlayer("COM")] # 항상 컴퓨터와 1대1로...
+
 def game_screen():
-    current = Turn.Turn.first_turn() # 게임 시작
+    current = Turn.Turn.first_turn()  # 게임 시작
     while True:
-        current_player=players[current.current_player]
-        can_do=current.step_1()
-        if len(can_do)==0:
+        current_player = players[current.current_player]
+        print("ME: " + str(current.player_hand[0]))
+        print("COM: " + str(current.player_hand[1]))
+        print("floor: " + str(current.cards_on_table))
+        print("MY SCORE: " + str(current.player_matched[0].calc_score()))
+        print("COM SCORE: " + str(current.player_matched[1].calc_score()))
+        can_do = current.step_1()
+        if len(can_do) == 0:
             raise Exception("Cannot Do Anything!!!!")
-        
+        action = current_player.get_action(current, can_do)
+        print('*** {0} takes action {1}'.format(current_player, str(action)))
+        last_player = current.current_player  # 기억해두기 (승자 출력을 위함)
+        current = current.step_2(action)
+        if current.get_result(last_player) == 0:
+            print('*** {0} wins!'.format(players[last_player]))
+            break
+
         screen.fill((0, 0, 0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -161,6 +177,7 @@ def game_screen():
 
         pygame.display.update()
         FPSCLOCK.tick(30)
+
 
 if __name__ == '__main__':
     main()

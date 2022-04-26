@@ -20,12 +20,12 @@ class Turn(object):
 
         else:
             self.winner = None
-            self.deck = Deck.Deck(prev_card=prev_turn.deck)
-            self.cards_on_table = CardsOnTable.CardsOnTable(*prev_turn.cards_on_table)  # 바닥패, player1과 player2에게 공통적인 패
+            self.deck = Deck(prev_card=prev_turn.deck)
+            self.cards_on_table = CardsOnTable(*prev_turn.cards_on_table)  # 바닥패, player1과 player2에게 공통적인 패
             self.current_player = prev_turn.current_player  # 지금이 아니라 턴 마지막에 current_player의 idx를 바꿔주면 됨
-            self.player_hand = [CardsOnHand.CardsOnHand(*card) for card in
+            self.player_hand = [CardsOnHand(*card) for card in
                                 prev_turn.player_hand]  # idx=0 -> player1 hand, idx=1 -> player2 hand
-            self.player_matched = [CardsMatched.CardsMatched(*card) for card in
+            self.player_matched = [CardsMatched(*card) for card in
                                    prev_turn.player_matched]  # idx=0 -> player1 matched cards, idx=1 -> player2 matched cards
 
     @staticmethod
@@ -39,6 +39,8 @@ class Turn(object):
                 current.player_hand[1] += current.deck.pop()
             for _ in range(4):  # 바닥에 4장
                 current.cards_on_table += current.deck.pop()
+
+
 
         # 총통은 첫 턴에서 바로 승리 처리
         # if current.player_hand[0].chongtong() and current.player_hand[1].chongtong():
@@ -55,6 +57,11 @@ class Turn(object):
         #     current.winner = 1
         #     current = TurnEnd()
         return current
+
+    def get_result(self, current_player):
+        if self.winner == current_player:
+            return 0
+        return 1
 
     def step_1(self):  # 자식 클래스들은 이 클래스를 가짐, 하지만 이 클래스에선 사용 x
         raise NotImplementedError()
@@ -90,14 +97,20 @@ class TurnStart(Turn):  # 턴 시작 상태 (1단계)
 
 
 class TurnMiddle(Turn):  # 턴 중간 상태 (2단계)
+    def __str__(self):
+        ret = super().__str__()
+        ret += 'Top card: {0}\n'.format(self.top_deck_card)
+        ret += 'Pair cards: {0}\n'.format(self.pair_cards)
+        return ret
+
     def step_1(self):  # 바닥 패와 뒤집은 패의 짝을 맞춰주는 함수
         can_match_cards = []  # 뒤집으면 바닥패와 맞출 수 있는 카드 리스트
-        pairs = self.cards_on_table.get_pair(self.top_card)  # top_card는 player가 deck에서 뒤집는 카드
+        pairs = self.cards_on_table.get_pair(self.top_deck_card)  # top_deck_card는 player가 deck에서 뒤집는 카드
         if pairs:  # 맞출 수 있는 카드가 1장 이상이라면
             for pair in pairs:
-                can_match_cards.append(Pair(self.top_card, pair))  # [뒤집은 카드, 짝 카드] 형식으로 저장
+                can_match_cards.append(Pair(self.top_deck_card, pair))  # [뒤집은 카드, 짝 카드] 형식으로 저장
         else:  # 맞출 수 있는 카드가 없다면
-            can_match_cards.append(Pair(self.top_card, None))  # [뒤집은 카드, None] 형식으로 저장
+            can_match_cards.append(Pair(self.top_deck_card, None))  # [뒤집은 카드, None] 형식으로 저장
         return can_match_cards
 
     def step_2(self, card_pairs):
@@ -115,7 +128,7 @@ class TurnMiddle(Turn):  # 턴 중간 상태 (2단계)
             else:  # 짝 카드가 없다면
                 current.cards_on_table += card_pairs.card  # 뒤집은 카드를 바닥에 둔다.
 
-        if current.player_matched[current.current_player].score >= 7:  # 현재 턴인 player의 점수가 7점 이상 났다면
+        if current.player_matched[current.current_player].calc_score() >= 7:  # 현재 턴인 player의 점수가 7점 이상 났다면
             current = TurnDecision(prev_turn=self)  # GO 또는 STOP을 외칠 수 있다.
         else:  # 점수가 나지 않았다면
             current.current_player = (current.current_player + 1) % 2  # 다음 턴으로 이동
@@ -147,5 +160,5 @@ class TurnEnd(Turn):
 
 
 class GoStop(object):
-    GO = 1
-    STOP = 2
+    GO = "GO"
+    STOP = "STOP"

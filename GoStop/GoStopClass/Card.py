@@ -6,7 +6,7 @@ class Card(object):
         self.card_type = card_type
 
     def __repr__(self):
-        return "{__class__name.__name__}(name='{name}', month={month}, card_type={card_type})".format(
+        return "{__class__.__name__}(name='{name}', month={month}, card_type={card_type})".format(
             __class__=self.__class__, **self.__dict__)
 
     def __str__(self):
