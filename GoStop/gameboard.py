@@ -1,7 +1,7 @@
 import pygame
 import sys
 
-from GoStopClass import Card
+from GoStopClass import Turn
 
 # 초기화
 pygame.init()
@@ -86,10 +86,13 @@ temp_table8 = pygame.image.load("SepPee1.jpg")
 
 players = [0, 1]
 def game_screen():
-    current = Turn.first_turn()
+    current = Turn.Turn.first_turn() # 게임 시작
     while True:
         current_player=players[current.current_player]
-
+        can_do=current.step_1()
+        if len(can_do)==0:
+            raise Exception("Cannot Do Anything!!!!")
+        
         screen.fill((0, 0, 0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

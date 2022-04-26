@@ -1,4 +1,5 @@
 class Card(object):
+
     def __init__(self, name, month, card_type):
         self.name = name
         self.month = month
@@ -121,7 +122,7 @@ dec_ssangpee = Card("DecSsangPee", Month.DEC, CardType.PEE)
 bonus1 = Card("Bonus1", Month.BONUS, CardType.SSANGPEE)
 bonus2 = Card("Bonus2", Month.BONUS, CardType.SSANGPEE)
 
-cards = [jan_gwang, jan_ttee, jan_pee1, jan_pee2, feb_godori, feb_ttee, feb_pee1, feb_pee2, mar_gwang, mar_ttee, mar_pee1, mar_pee2,
+all_cards = [jan_gwang, jan_ttee, jan_pee1, jan_pee2, feb_godori, feb_ttee, feb_pee1, feb_pee2, mar_gwang, mar_ttee, mar_pee1, mar_pee2,
          apr_godori, apr_ttee, apr_pee1, apr_pee2, may_meong, may_ttee, may_pee1, may_pee2, jun_meong, jun_ttee, jun_pee1, jun_pee2,
          jul_meong, jul_ttee, jul_pee1, jul_pee2, aug_gwang, aug_godori, aug_pee1, aug_pee2, sep_gukjin, sep_ttee, sep_pee1,
          sep_pee2, oct_meong, oct_ttee, oct_pee1, oct_pee2, nov_gwang, nov_pee1, nov_pee2, nov_ssangpee, dec_bigwang, dec_meong,
