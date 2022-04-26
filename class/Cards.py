@@ -34,19 +34,19 @@ class Cards(object):
     #         monthCards[card.month].append(card)
     #     return monthCards
 
-    def monthCount(self): # 총통, 폭탄, 흔들기 등의 처리를 위함
-        monthCnt=[0 for _ in range(13)] # 1월부터 12월까지 있으니까 index가 12까지 있도록 처리했음
+    def month_count(self): # 총통, 폭탄, 흔들기 등의 처리를 위함
+        month_cnt=[0 for _ in range(13)] # 1월부터 12월까지 있으니까 index가 12까지 있도록 처리했음
         for card in self.cards:
-            monthCnt[card.month]+=1
-        return monthCnt
+            month_cnt[card.month]+=1
+        return month_cnt
 
-    def cardTypeArrange(self):
-        typeCards={}
+    def card_type_arrange(self):
+        type_cards={}
         for card in self.cards:
             # 국진 패의 경우 list형의 card_type임
             if isinstance(card.card_type, list): # 만약 card_type이 list형이라면
                 for t in card.card_type:
-                    typeCards[t].append(card) # 두 card_type 모두에 추가
+                    type_cards[t].append(card) # 두 card_type 모두에 추가
             else:
-                typeCards[card.card_type].append(card)
-        return typeCards
+                type_cards[card.card_type].append(card)
+        return type_cards

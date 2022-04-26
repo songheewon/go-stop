@@ -2,19 +2,19 @@ import Cards
 
 
 class CardsOnHand(Cards):
-    def calcScore(self):
+    def calc_score(self):
         self.score = 0
-        self.month_cards = self.monthArrange()
-        self.month_cnt = self.monthCount()
+        self.month_cards = self.month_arrange()
+        self.month_cnt = self.month_count()
 
-    def chongTong(self):  # 총통 여부
+    def chongtong(self):  # 총통 여부
         for cnt in self.month_cnt:
             if cnt == 4:
                 return True
         return False
 
-    def getChongTongMonth(self):
-        if not self.chongTong():
+    def get_chongTong_month(self):
+        if not self.chongtong():
             return
         chongtong_month = 0
         for month in range(13):

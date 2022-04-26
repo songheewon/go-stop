@@ -9,7 +9,7 @@ class Deck(list):
         super(Deck, self).__init__(prev_card)
 
     # 카드를 섞는 함수
-    def cardShuffle(self):
+    def card_shuffle(self):
         random.shuffle(self)
 
     def __hash__(self):

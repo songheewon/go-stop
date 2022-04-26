@@ -3,7 +3,7 @@ import CardsMatched
 import CardsOnTable
 import CardsOnHand
 import TurnStart
-import CardAction
+import Pair
 
 
 class Turn(object):
@@ -33,7 +33,7 @@ class Turn(object):
                                    prev_turn.player_matched]  # idx=0 -> player1 matched cards, idx=1 -> player2 matched cards
 
 
-    def firstTurn(self): # 맨 처음 턴은 무조건 패 섞고 패 나누기를 진행
+    def first_turn(self): # 맨 처음 턴은 무조건 패 섞고 패 나누기를 진행
         current=TurnStart() # 지금 상태는 턴 시작 상태
         current.deck.cardShuffle()  # 패 섞기
         for _ in range(2):  # 2번 반복
@@ -45,14 +45,14 @@ class Turn(object):
                 current.cards_on_table += current.deck.pop()
 
         # 총통은 첫 턴에서 바로 승리 처리
-        if current.player_hand[0].chongTong() and current.player_hand[1].chongTong():
-            if current.player_hand[0].getChongTongMonth() > current.player2_hand[1].getChongTongMonth():
+        if current.player_hand[0].chongtong() and current.player_hand[1].chongtong():
+            if current.player_hand[0].get_chongtong_month() > current.player2_hand[1].get_chongtong_month():
                 current.winner = 0
             else:
                 current.winner = 1
-        elif current.player_hand[0].chongTong():
+        elif current.player_hand[0].chongtong():
             current.winner = 0
-        elif current.player_hand[1].chongTong():
+        elif current.player_hand[1].chongtong():
             current.winner = 1
 
         return current
