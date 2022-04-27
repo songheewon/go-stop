@@ -5,7 +5,7 @@ class Pair(object):
 
     def __str__(self):
         if self.pair:
-            ret = "내가 가진 " + str(self.card) + "와 바닥패인 "+str(self.pair)
+            ret = str(self.card) + "패와 바닥패인 "+ str(self.pair) + "패를 맞춥니다."
         else:
-            ret = "짝이 없는" + str(self.card)
+            ret = "짝이 없는 " + str(self.card) + "패를 내려놓습니다."
         return ret

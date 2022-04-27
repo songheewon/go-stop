@@ -11,6 +11,3 @@ class Deck(list):
     # 카드를 섞는 함수
     def card_shuffle(self):
         random.shuffle(self)
-
-    def __hash__(self):
-        return hash(self)

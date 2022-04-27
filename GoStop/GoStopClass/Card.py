@@ -1,30 +1,12 @@
 class Card(object):
-
     def __init__(self, name, month, card_type):
         self.name = name
         self.month = month
         self.card_type = card_type
-
-    def __repr__(self):
-        return "{__class__.__name__}(name='{name}', month={month}, card_type={card_type})".format(
-            __class__=self.__class__, **self.__dict__)
+        self.img_file = name + ".jpg" # 사진 파일명
 
     def __str__(self):
         return self.name
-
-    # __eq__ 함수가 필요하려나...?
-    # def __eq__(self, other):
-    #     if other is None:
-    #         return False
-    #     elif isinstance(other, self.__class__):
-    #         return self.month == other.month and self.card_type == other.card_type
-    #     return not NotImplemented
-
-    # Card 객체 간의 크기 비교는 할 일이 없으니 __lt__나 __gt__와 같은 함수는 생성 x
-    # 혹시 미니게임으로 섯다를 추가하게 될 경우 만들자!
-
-    def __hash__(self):
-        return hash(self.month, self.card_type)
 
 
 class Month(object):
@@ -55,8 +37,8 @@ class CardType(object):
     PEE = 9  # 피
     SSANGPEE = 10  # 쌍피
 
-#class ImgName(object):
 
+# class ImgName(object):
 
 
 jan_gwang = Card("JanGwang", Month.JAN, CardType.GWANG)
@@ -119,11 +101,15 @@ dec_meong = Card("DecMeong", Month.DEC, CardType.MEONG)
 dec_bittee = Card("DecBiTtee", Month.DEC, CardType.BITTEE)
 dec_ssangpee = Card("DecSsangPee", Month.DEC, CardType.PEE)
 
-bonus1 = Card("Bonus1", Month.BONUS, CardType.SSANGPEE)
-bonus2 = Card("Bonus2", Month.BONUS, CardType.SSANGPEE)
+# bonus1 = Card("Bonus1", Month.BONUS, CardType.SSANGPEE)
+# bonus2 = Card("Bonus2", Month.BONUS, CardType.SSANGPEE)
 
-all_cards = [jan_gwang, jan_ttee, jan_pee1, jan_pee2, feb_godori, feb_ttee, feb_pee1, feb_pee2, mar_gwang, mar_ttee, mar_pee1, mar_pee2,
-         apr_godori, apr_ttee, apr_pee1, apr_pee2, may_meong, may_ttee, may_pee1, may_pee2, jun_meong, jun_ttee, jun_pee1, jun_pee2,
-         jul_meong, jul_ttee, jul_pee1, jul_pee2, aug_gwang, aug_godori, aug_pee1, aug_pee2, sep_gukjin, sep_ttee, sep_pee1,
-         sep_pee2, oct_meong, oct_ttee, oct_pee1, oct_pee2, nov_gwang, nov_pee1, nov_pee2, nov_ssangpee, dec_bigwang, dec_meong,
-         dec_bittee, dec_ssangpee, bonus1, bonus2]
+all_cards = [jan_gwang, jan_ttee, jan_pee1, jan_pee2, feb_godori, feb_ttee, feb_pee1, feb_pee2, mar_gwang, mar_ttee,
+             mar_pee1, mar_pee2,
+             apr_godori, apr_ttee, apr_pee1, apr_pee2, may_meong, may_ttee, may_pee1, may_pee2, jun_meong, jun_ttee,
+             jun_pee1, jun_pee2,
+             jul_meong, jul_ttee, jul_pee1, jul_pee2, aug_gwang, aug_godori, aug_pee1, aug_pee2, sep_gukjin, sep_ttee,
+             sep_pee1,
+             sep_pee2, oct_meong, oct_ttee, oct_pee1, oct_pee2, nov_gwang, nov_pee1, nov_pee2, nov_ssangpee,
+             dec_bigwang, dec_meong,
+             dec_bittee, dec_ssangpee] # bonus 카드 일단은 제거 ㅠㅠ 천천히 해보자..!

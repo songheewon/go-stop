@@ -29,20 +29,17 @@ class Cards(object):
     def __iter__(self):
         return iter(self.cards)
 
+    def pop(self):
+        return self.cards.pop()
+
     def remove(self, card):
         self.cards.remove(card)
 
     def month_arrange(self):  # 총통, 폭탄, 흔들기 등의 처리를 위함
-        monthCards = defaultdict(list)
+        month_cards = defaultdict(list)
         for card in self.cards:
-            monthCards[card.month].append(card)
-        return monthCards
-
-    # def month_count(self):  # 총통, 폭탄, 흔들기 등의 처리를 위함
-    #     month_cnt = [0 for _ in range(13)]  # 1월부터 12월까지 있으니까 index가 12까지 있도록 처리했음
-    #     for card in self.cards:
-    #         month_cnt[card.month] += 1  # 카드의 월에 해당하는 idx의 값 1 증가
-    #     return month_cnt
+            month_cards[card.month].append(card)
+        return month_cards
 
     def card_type_arrange(self):
         type_cards = defaultdict(list)
@@ -57,16 +54,17 @@ class Cards(object):
 
 
 class CardsOnHand(Cards):
+    # 여기서 폭탄이랑 흔들기 처리를 해주면 좋을텐데!!!!
+    # @property
     def calc_score(self):
-        scores = 0
-        month_cards = self.month_arrange()
-        month_count = Counter(len(cards) for cards in month_cards.values())
-        if month_count[3] > 0:
-            scores.append((_('Three cards of a month'), month_count[3]))
-        if month_count[4] > 0:
-            scores.append((_('Four cards of a month'), month_count[4]))
-
-        return scores
+         score = 0
+    #     month_cards = self.month_arrange()
+    #     month_count = Counter(len(cards) for cards in month_cards.values())
+    #     print(month_count)
+    #     if month_count[3]>0:
+    #         print(month_count[3])
+    #
+         return score
 
 
 class CardsMatched(Cards):
@@ -99,7 +97,7 @@ class CardsMatched(Cards):
         if len(godori_cards) == 3:  # 고도리가 3장 다 모였다면
             self.score += 5  # 5점 증가
 
-    def ttee_score(self): # 띠 계산
+    def ttee_score(self):  # 띠 계산
         ttee_cards = self.type_cards[CardType.REDTTEE] + self.type_cards[CardType.BLUETTEE] + self.type_cards[
             CardType.TTEE] + self.type_cards[CardType.BITTEE]  # 띠 패 전부 (홍단+청단+초단+비초단)
         redTtee_cards = self.type_cards[CardType.REDTTEE]  # 홍단
@@ -114,7 +112,7 @@ class CardsMatched(Cards):
         if len(choTtee_cards) == 3:  # 초단이 3장 다 모였다면
             self.score += 3  # 3점 증가
 
-    def pee_score(self): # 피 계산
+    def pee_score(self):  # 피 계산
         pee_cards = self.type_cards[CardType.PEE]  # 피
         ssangpee_cards = self.type_cards[CardType.SSANGPEE]  # 쌍피
         add_score = len(pee_cards) + 2 * len(ssangpee_cards)
@@ -127,11 +125,11 @@ class CardsMatched(Cards):
 
 
 class CardsOnTable(Cards):
-    def get_pair(self, card): # 짝 맞는 것을 찾아주는 함수
+    def get_pair(self, card):  # 짝 맞는 것을 찾아주는 함수
         # card는 내가 내고자 하는 카드
         # self.cards는 바닥에 깔린 카드들
         pair = []
         for card_on_table in self.cards:
-            if card_on_table.month == card.month: # 월이 일치한다면
-                pair.append(card_on_table) # 추가
+            if card_on_table.month == card.month:  # 월이 일치한다면
+                pair.append(card_on_table)  # 추가
         return pair
